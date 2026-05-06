@@ -1,0 +1,327 @@
+---
+---
+
+<section class="hero">
+	<div class="hero-bg"></div>
+	<div class="hero-grid-overlay"></div>
+	<div class="hero-content">
+		<div class="hero-text">
+			<h1>DIGITAL STAND<br />MANUFACTURING<br />EXPERT</h1>
+			<p class="hero-subtitle">FOCUS ON 3C DIGITAL STAND SOLUTIONS</p>
+			<div class="hero-highlight">
+				<span class="highlight-dot"></span>
+				<span>PRECISION MANUFACTURING</span>
+			</div>
+			<div class="hero-highlight">
+				<span class="highlight-dot"></span>
+				<span>DRIVING THE FUTURE</span>
+			</div>
+			<a href="/about" class="hero-btn">
+				<span>LEARN MORE</span>
+				<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<polyline points="9 18 15 12 9 6"/>
+				</svg>
+			</a>
+		</div>
+		<div class="hero-images">
+			<div class="product-display">
+				<div class="stand stand-tall">
+					<div class="stand-base"></div>
+					<div class="product-card">
+						<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=modern%20aluminum%20tablet%20stand%20silver%20color%20holding%20tablet%20professional%20product%20photography%20white%20background&image_size=portrait_4_3" alt="Tablet Stand" loading="lazy" />
+					</div>
+				</div>
+				<div class="stand stand-medium">
+					<div class="stand-base"></div>
+					<div class="product-card">
+						<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=modern%20aluminum%20foldable%20laptop%20stand%20silver%20color%20professional%20product%20photography%20white%20background&image_size=portrait_4_3" alt="Laptop Stand" loading="lazy" />
+					</div>
+				</div>
+				<div class="stand stand-short">
+					<div class="stand-base"></div>
+					<div class="product-card">
+						<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=modern%20aluminum%20phone%20stand%20black%20color%20holding%20smartphone%20professional%20product%20photography%20white%20background&image_size=portrait_4_3" alt="Phone Stand" loading="lazy" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<style>
+	.hero {
+		position: relative;
+		padding: 5rem 5% 8rem;
+		background-color: #ffffff;
+		overflow: hidden;
+	}
+	.hero-bg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 58%;
+		height: 100%;
+		background: linear-gradient(175deg, #0a2463 0%, #0e307f 50%, #0a2463 100%);
+		clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+	}
+	.hero-grid-overlay {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 58%;
+		height: 100%;
+		background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+		clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+	}
+	.hero-content {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-width: 1500px;
+		margin: 0 auto;
+		gap: 3rem;
+	}
+	.hero-text {
+		flex: 0 0 440px;
+		z-index: 10;
+	}
+	.hero-text h1 {
+		font-size: 3.8rem;
+		font-weight: 900;
+		color: #0a2463;
+		line-height: 0.95;
+		margin-bottom: 0;
+		letter-spacing: -0.025em;
+		text-transform: uppercase;
+	}
+	.hero-subtitle {
+		font-size: 0.925rem;
+		color: #0a2463;
+		font-weight: 500;
+		letter-spacing: 0.22em;
+		margin: 1.6rem 0 2.2rem;
+		text-transform: uppercase;
+	}
+	.hero-highlight {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.75rem;
+	}
+	.highlight-dot {
+		flex-shrink: 0;
+		width: 7px;
+		height: 7px;
+		background-color: #e63946;
+		border-radius: 50%;
+	}
+	.hero-highlight span {
+		font-size: 0.72rem;
+		color: #0a2463;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+	.hero-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.7rem;
+		margin-top: 2.75rem;
+		background-color: #0a2463;
+		color: #ffffff;
+		border: none;
+		padding: 1rem 2.75rem;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		text-decoration: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+	.hero-btn:hover {
+		background-color: #1e3a5f;
+		transform: translateY(-2px);
+		box-shadow: 0 14px 35px rgba(10, 36, 99, 0.3);
+	}
+	.hero-btn:focus-visible {
+		outline: 2px solid #e63946;
+		outline-offset: 3px;
+	}
+	.hero-images {
+		flex: 1;
+		position: relative;
+		z-index: 10;
+	}
+	.product-display {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		gap: 0;
+		height: 520px;
+	}
+	.stand {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.stand-base {
+		border-radius: 4px;
+	}
+	.stand-tall {
+		order: 2;
+	}
+	.stand-tall .stand-base {
+		width: 160px;
+		height: 110px;
+		background: linear-gradient(180deg, rgba(10, 36, 99, 0.85) 0%, rgba(30, 58, 95, 0.9) 100%);
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 8px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+	}
+	.stand-tall .product-card {
+		width: 130px;
+		height: 175px;
+		margin-bottom: 10px;
+	}
+	.stand-medium {
+		order: 1;
+		margin-right: 15px;
+	}
+	.stand-medium .stand-base {
+		width: 170px;
+		height: 55px;
+		background: linear-gradient(180deg, rgba(200, 200, 210, 0.7) 0%, rgba(160, 160, 170, 0.8) 100%);
+		border-radius: 50%;
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+	}
+	.stand-medium .product-card {
+		width: 120px;
+		height: 155px;
+		margin-bottom: 8px;
+	}
+	.stand-short {
+		order: 3;
+		margin-left: 15px;
+	}
+	.stand-short .stand-base {
+		width: 140px;
+		height: 32px;
+		background: linear-gradient(180deg, rgba(220, 220, 225, 0.7) 0%, rgba(180, 180, 190, 0.8) 100%);
+		border-radius: 6px;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	}
+	.stand-short .product-card {
+		width: 100px;
+		height: 130px;
+		margin-bottom: 6px;
+	}
+	.product-card {
+		border-radius: 10px;
+		overflow: hidden;
+		box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+		transition: transform 0.4s ease, box-shadow 0.4s ease;
+		background: #ffffff;
+	}
+	.product-card:hover {
+		transform: translateY(-6px) scale(1.04);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+	}
+	.product-card img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	@media (max-width: 1100px) {
+		.hero {
+			padding: 4rem 5% 6rem;
+		}
+		.hero-content {
+			flex-direction: column;
+		}
+		.hero-text {
+			flex: none;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.hero-text h1 {
+			font-size: 3rem;
+		}
+		.hero-bg, .hero-grid-overlay {
+			display: none;
+		}
+		.hero-images {
+			width: 100%;
+		}
+		.product-display {
+			height: 400px;
+			justify-content: center;
+			gap: 5px;
+		}
+	}
+	@media (max-width: 768px) {
+		.hero {
+			padding: 3rem 5% 4rem;
+		}
+		.hero-text {
+			max-width: 100%;
+		}
+		.hero-text h1 {
+			font-size: 1.9rem;
+			line-height: 1.05;
+		}
+		.hero-subtitle {
+			font-size: 0.7rem;
+			letter-spacing: 0.16em;
+			margin: 1.2rem 0 1.5rem;
+		}
+		.hero-btn {
+			padding: 0.85rem 2rem;
+			font-size: 0.7rem;
+			margin-top: 2rem;
+		}
+		.hero-images {
+			width: 100%;
+		}
+		.product-display {
+			height: 260px;
+			flex-wrap: nowrap;
+			justify-content: center;
+			gap: 6px;
+		}
+		.stand-tall .stand-base {
+			width: 90px;
+			height: 60px;
+		}
+		.stand-tall .product-card {
+			width: 80px;
+			height: 110px;
+		}
+		.stand-medium {
+			margin-right: 8px;
+		}
+		.stand-medium .stand-base {
+			width: 100px;
+			height: 32px;
+		}
+		.stand-medium .product-card {
+			width: 75px;
+			height: 95px;
+		}
+		.stand-short {
+			margin-left: 8px;
+		}
+		.stand-short .stand-base {
+			width: 80px;
+			height: 20px;
+		}
+		.stand-short .product-card {
+			width: 65px;
+			height: 80px;
+		}
+	}
+</style>

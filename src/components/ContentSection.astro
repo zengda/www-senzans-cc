@@ -1,0 +1,309 @@
+---
+import FormattedDate from './FormattedDate.astro';
+---
+
+<section class="content-section">
+	<div class="content-container">
+		<div class="section-main">
+			<article class="blog-card">
+				<div class="section-label">
+					<span class="label-dot"></span>
+					<span>BLOG</span>
+				</div>
+				<div class="card-image">
+					<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=modern%20phone%20stand%20on%20wooden%20desk%20office%20setup%20professional%20photography%20warm%20lighting&image_size=landscape_16_9" alt="Blog Featured" loading="lazy" />
+				</div>
+				<div class="card-body">
+					<h3>How to Choose the Right Stand for Your Devices</h3>
+					<p>A practical guide to help you select the best digital stand for different scenarios.</p>
+					<a href="/blog/how-to-choose" class="read-more">
+						<span>READ MORE</span>
+						<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="9 18 15 12 9 6"/>
+						</svg>
+					</a>
+				</div>
+			</article>
+			<article class="about-card">
+				<div class="section-label">
+					<span class="label-dot"></span>
+					<span>ABOUT</span>
+				</div>
+				<div class="card-image">
+					<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=modern%20corporate%20headquarters%20building%20blue%20glass%20facade%20professional%20architecture%20photography&image_size=landscape_16_9" alt="About SENZANS" loading="lazy" />
+				</div>
+				<div class="card-body">
+					<h3>About SENZANS INDUSTRIAL</h3>
+					<p>Dedicated to providing high-quality 3C digital stand solutions with innovation and reliability.</p>
+					<a href="/about" class="read-more">
+						<span>VIEW MORE</span>
+						<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="9 18 15 12 9 6"/>
+						</svg>
+					</a>
+				</div>
+			</article>
+		</div>
+		<aside class="section-side">
+			<div class="latest-blog">
+				<div class="section-label">
+					<span class="label-dot"></span>
+					<span>LATEST BLOG</span>
+				</div>
+				<div class="blog-list">
+					<a href="/blog/ergonomic-workspace" class="blog-item">
+						<div class="blog-item-image">
+							<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=ergonomic%20monitor%20stand%20workspace%20office%20setup%20minimal&image_size=square" alt="Blog Thumbnail" loading="lazy" />
+						</div>
+						<div class="blog-item-content">
+							<h4>Ergonomic Workspace Setup with Monitor Stands</h4>
+							<FormattedDate date={new Date('2025-05-20')} />
+						</div>
+					</a>
+					<div class="blog-item-divider"></div>
+					<a href="/blog/evolution-digital-stands" class="blog-item">
+						<div class="blog-item-image">
+							<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=digital%20stands%20evolution%20tech%20accessories%20minimal&image_size=square" alt="Blog Thumbnail" loading="lazy" />
+						</div>
+						<div class="blog-item-content">
+							<h4>The Evolution of Digital Stands: From Basic to Smart</h4>
+							<FormattedDate date={new Date('2025-05-15')} />
+						</div>
+					</a>
+					<div class="blog-item-divider"></div>
+					<a href="/blog/industry-insights-2025" class="blog-item">
+						<div class="blog-item-image">
+							<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=3C%20accessories%20market%20trends%20infographic%20modern&image_size=square" alt="Blog Thumbnail" loading="lazy" />
+						</div>
+						<div class="blog-item-content">
+							<h4>Industry Insights: 3C Accessories Market Trends in 2025</h4>
+							<FormattedDate date={new Date('2025-05-10')} />
+						</div>
+					</a>
+				</div>
+				<a href="/blog" class="view-all">
+					<span>VIEW ALL</span>
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="9 18 15 12 9 6"/>
+					</svg>
+				</a>
+			</div>
+		</aside>
+	</div>
+</section>
+<style>
+	.content-section {
+		padding: 5.5rem 5%;
+		background-color: #f8fafc;
+	}
+	.content-container {
+		display: grid;
+		grid-template-columns: 1fr 0.42fr;
+		gap: 2.5rem;
+		max-width: 1500px;
+		margin: 0 auto;
+		align-items: start;
+	}
+	.section-main {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+	}
+	.section-label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+	.label-dot {
+		width: 6px;
+		height: 6px;
+		background-color: #e63946;
+		border-radius: 50%;
+	}
+	.section-label span:last-child {
+		font-size: 0.68rem;
+		font-weight: 700;
+		color: #0a2463;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+	}
+	.blog-card, .about-card {
+		background-color: #ffffff;
+		border: 1px solid #f1f5f9;
+		overflow: hidden;
+		transition: box-shadow 0.3s ease, transform 0.3s ease;
+	}
+	.blog-card:hover, .about-card:hover {
+		box-shadow: 0 8px 35px rgba(10, 36, 99, 0.07);
+		transform: translateY(-3px);
+	}
+	.card-image {
+		overflow: hidden;
+	}
+	.card-image img {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		transition: transform 0.5s ease;
+	}
+	.blog-card:hover .card-image img,
+	.about-card:hover .card-image img {
+		transform: scale(1.05);
+	}
+	.card-body {
+		padding: 1rem 1.25rem 0;
+	}
+	.card-body h3 {
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: #0a2463;
+		margin: 0 0 0.5rem;
+		line-height: 1.45;
+	}
+	.card-body p {
+		font-size: 0.825rem;
+		color: #64748b;
+		margin: 0;
+		line-height: 1.65;
+	}
+	.read-more {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		color: #e63946;
+		text-decoration: none;
+		padding: 1rem 1.25rem 1.25rem;
+		margin-left: -1.25rem;
+		transition: color 0.2s ease, gap 0.2s ease;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+	.read-more:hover {
+		color: #c53030;
+		gap: 0.7rem;
+	}
+	.section-side {
+		position: sticky;
+		top: 5rem;
+	}
+	.latest-blog {
+		background-color: #ffffff;
+		border: 1px solid #f1f5f9;
+		padding: 1.25rem;
+	}
+	.blog-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		margin-bottom: 1.25rem;
+	}
+	.blog-item {
+		display: flex;
+		gap: 0.85rem;
+		text-decoration: none;
+		padding: 0.85rem 0;
+		transition: transform 0.2s ease;
+	}
+	.blog-item:hover {
+		transform: translateX(5px);
+	}
+	.blog-item-divider {
+		height: 1px;
+		background-color: #f1f5f9;
+	}
+	.blog-item-image {
+		flex-shrink: 0;
+		width: 72px;
+		height: 72px;
+		overflow: hidden;
+	}
+	.blog-item-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.blog-item-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		min-width: 0;
+	}
+	.blog-item-content h4 {
+		font-size: 0.825rem;
+		font-weight: 600;
+		color: #0a2463;
+		margin: 0 0 0.3rem;
+		line-height: 1.4;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	.blog-item-content time {
+		font-size: 0.7rem;
+		color: #94a3b8;
+	}
+	.view-all {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		color: #e63946;
+		text-decoration: none;
+		padding: 0.75rem;
+		border: 1px solid #e63946;
+		transition: all 0.25s ease;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+	.view-all:hover {
+		background-color: #e63946;
+		color: #ffffff;
+	}
+	@media (max-width: 1024px) {
+		.content-container {
+			grid-template-columns: 1fr;
+		}
+		.section-main {
+			grid-template-columns: 1fr;
+		}
+		.section-side {
+			position: static;
+		}
+		.blog-list {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+		.blog-item {
+			width: calc(50% - 0.5rem);
+		}
+		.blog-item-divider {
+			display: none;
+		}
+	}
+	@media (max-width: 768px) {
+		.content-section {
+			padding: 3.5rem 5%;
+		}
+		.content-container {
+			gap: 2rem;
+		}
+		.section-main {
+			gap: 1.5rem;
+		}
+		.blog-list {
+			flex-direction: column;
+		}
+		.blog-item {
+			width: 100%;
+		}
+		.blog-item-divider {
+			display: block;
+		}
+	}
+</style>
