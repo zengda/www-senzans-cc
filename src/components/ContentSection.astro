@@ -1,29 +1,41 @@
 ---
+import { getPosts, getPageBySlug } from '../lib/graphql';
 import FormattedDate from './FormattedDate.astro';
+
+const postsData = await getPosts(4);
+const posts = postsData.posts.nodes;
+const featuredPost = posts[0] || null;
+const latestPosts = posts.slice(1, 4);
 ---
 
 <section class="content-section">
 	<div class="content-container">
 		<div class="section-main">
-			<article class="blog-card">
-				<div class="section-label">
-					<span class="label-dot"></span>
-					<span>BLOG</span>
-				</div>
-				<div class="card-image">
-					<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=modern%20phone%20stand%20on%20wooden%20desk%20office%20setup%20professional%20photography%20warm%20lighting&image_size=landscape_16_9" alt="Blog Featured" loading="lazy" />
-				</div>
-				<div class="card-body">
-					<h3>How to Choose the Right Stand for Your Devices</h3>
-					<p>A practical guide to help you select the best digital stand for different scenarios.</p>
-					<a href="/blog/how-to-choose" class="read-more">
-						<span>READ MORE</span>
-						<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<polyline points="9 18 15 12 9 6"/>
-						</svg>
-					</a>
-				</div>
-			</article>
+			{featuredPost && (
+				<article class="blog-card">
+					<div class="section-label">
+						<span class="label-dot"></span>
+						<span>BLOG</span>
+					</div>
+					<div class="card-image">
+						<img 
+							src={featuredPost.featuredImage?.node?.sourceUrl || `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(featuredPost.title + ' product photography professional')}&image_size=landscape_16_9`} 
+							alt={featuredPost.featuredImage?.node?.altText || featuredPost.title} 
+							loading="lazy" 
+						/>
+					</div>
+					<div class="card-body">
+						<h3>{featuredPost.title}</h3>
+						<p>{featuredPost.excerpt || 'Read more about this article.'}</p>
+						<a href={`/blog/${featuredPost.slug}`} class="read-more">
+							<span>READ MORE</span>
+							<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<polyline points="9 18 15 12 9 6"/>
+							</svg>
+						</a>
+					</div>
+				</article>
+			)}
 			<article class="about-card">
 				<div class="section-label">
 					<span class="label-dot"></span>
@@ -51,35 +63,24 @@ import FormattedDate from './FormattedDate.astro';
 					<span>LATEST BLOG</span>
 				</div>
 				<div class="blog-list">
-					<a href="/blog/ergonomic-workspace" class="blog-item">
-						<div class="blog-item-image">
-							<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=ergonomic%20monitor%20stand%20workspace%20office%20setup%20minimal&image_size=square" alt="Blog Thumbnail" loading="lazy" />
-						</div>
-						<div class="blog-item-content">
-							<h4>Ergonomic Workspace Setup with Monitor Stands</h4>
-							<FormattedDate date={new Date('2025-05-20')} />
-						</div>
-					</a>
-					<div class="blog-item-divider"></div>
-					<a href="/blog/evolution-digital-stands" class="blog-item">
-						<div class="blog-item-image">
-							<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=digital%20stands%20evolution%20tech%20accessories%20minimal&image_size=square" alt="Blog Thumbnail" loading="lazy" />
-						</div>
-						<div class="blog-item-content">
-							<h4>The Evolution of Digital Stands: From Basic to Smart</h4>
-							<FormattedDate date={new Date('2025-05-15')} />
-						</div>
-					</a>
-					<div class="blog-item-divider"></div>
-					<a href="/blog/industry-insights-2025" class="blog-item">
-						<div class="blog-item-image">
-							<img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=3C%20accessories%20market%20trends%20infographic%20modern&image_size=square" alt="Blog Thumbnail" loading="lazy" />
-						</div>
-						<div class="blog-item-content">
-							<h4>Industry Insights: 3C Accessories Market Trends in 2025</h4>
-							<FormattedDate date={new Date('2025-05-10')} />
-						</div>
-					</a>
+					{latestPosts.map((post, index) => (
+						<>
+							<a href={`/blog/${post.slug}`} class="blog-item" key={post.id}>
+								<div class="blog-item-image">
+									<img 
+										src={post.featuredImage?.node?.sourceUrl || `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(post.title + ' product thumbnail')}&image_size=square`} 
+										alt={post.featuredImage?.node?.altText || post.title} 
+										loading="lazy" 
+									/>
+								</div>
+								<div class="blog-item-content">
+									<h4>{post.title}</h4>
+									<FormattedDate date={new Date(post.date)} />
+								</div>
+							</a>
+							{index < latestPosts.length - 1 && <div class="blog-item-divider"></div>}
+						</>
+					))}
 				</div>
 				<a href="/blog" class="view-all">
 					<span>VIEW ALL</span>

@@ -1,21 +1,32 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
+import { getPostBySlug, getPosts } from '../../lib/graphql';
+import BlogPostLayout from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const postsData = await getPosts(50);
+	const posts = postsData.posts.nodes;
 	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
+		params: { slug: post.slug },
 	}));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
-const { Content } = await render(post);
+const { slug } = Astro.params;
+
+const data = slug ? await getPostBySlug(slug) : null;
+const post = data?.postBy;
+
+if (!post) {
+	return Astro.redirect('/404');
+}
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<BlogPostLayout
+	title={post.title}
+	content={post.content}
+	excerpt={post.excerpt}
+	date={post.date}
+	featuredImage={post.featuredImage}
+	categories={post.categories?.nodes || []}
+	tags={post.tags?.nodes || []}
+	author={post.author}
+/>

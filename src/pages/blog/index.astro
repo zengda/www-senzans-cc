@@ -1,111 +1,368 @@
 ---
+import { getPosts, getCategories } from '../../lib/graphql';
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const postsData = await getPosts(20);
+const posts = postsData.posts.nodes;
+const featuredPost = posts[0] || null;
+const restPosts = posts.slice(1);
+
+const categoriesData = await getCategories().catch(() => null);
+const categories = categoriesData?.categories?.nodes || [];
+const pageTitle = 'Blog — SENZANS INDUSTRIAL';
+const pageDescription = 'Explore the latest insights on digital stands, ergonomic workspace solutions, and 3C accessories from SENZANS INDUSTRIAL.';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
+		<BaseHead title={pageTitle} description={pageDescription} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+			<section class="blog-hero">
+				<div class="blog-hero-inner">
+					<h1>Blog</h1>
+					<p>Insights on digital stands, ergonomic solutions, and industry trends</p>
+				</div>
+			</section>
+			<section class="blog-body">
+				<div class="blog-layout">
+					<div class="blog-main">
+						{featuredPost && (
+							<article class="post-featured">
+								<a href={`/blog/${featuredPost.slug}`} class="post-featured-link">
+									<div class="post-featured-image">
+										<img 
+											src={featuredPost.featuredImage?.node?.sourceUrl || `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(featuredPost.title + ' product photography professional')}&image_size=landscape_16_9`} 
+											alt={featuredPost.featuredImage?.node?.altText || featuredPost.title}
+											loading="eager"
+										/>
+									</div>
+									<div class="post-featured-body">
+										<div class="post-meta">
+											<FormattedDate date={new Date(featuredPost.date)} />
+										</div>
+										<h2>{featuredPost.title}</h2>
+										<p>{featuredPost.excerpt?.replace(/<[^>]+>/g, '') || 'Read this article'}</p>
+										<span class="btn-read" href={`/blog/${featuredPost.slug}`}>
+											Read Article
+											<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<polyline points="9 18 15 12 9 6"/>
+											</svg>
+										</span>
+									</div>
 								</a>
-							</li>
-						))
-					}
-				</ul>
+							</article>
+						)}
+						<div class="post-grid">
+							{restPosts.map((post) => (
+								<article class="post-card">
+									<a href={`/blog/${post.slug}`} class="post-card-link">
+										<div class="post-card-image">
+											<img 
+												src={post.featuredImage?.node?.sourceUrl || `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(post.title + ' product photography white background')}&image_size=square`} 
+												alt={post.featuredImage?.node?.altText || post.title}
+												loading="lazy"
+											/>
+										</div>
+										<div class="post-card-body">
+											<div class="post-meta">
+												<FormattedDate date={new Date(post.date)} />
+											</div>
+											<h3>{post.title}</h3>
+											<p>{post.excerpt?.replace(/<[^>]+>/g, '').substring(0, 120) || 'Read this article'}...</p>
+										</div>
+									</a>
+								</article>
+							))}
+						</div>
+					</div>
+					<aside class="blog-sidebar">
+						<div class="sidebar-widget">
+							<h4>Categories</h4>
+							{categories.length > 0 ? (
+								<ul class="category-list">
+									{categories.map((cat) => (
+										<li>
+											<a href={`/blog?category=${cat.slug}`}>
+												<span>{cat.name}</span>
+												<span class="cat-count">{cat.count}</span>
+											</a>
+										</li>
+									))}
+								</ul>
+							) : (
+								<p class="sidebar-empty">No categories yet</p>
+							)}
+						</div>
+					</aside>
+				</div>
 			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+<style>
+	.blog-hero {
+		background: linear-gradient(135deg, #0a2463 0%, #1e3a5f 100%);
+		padding: 4rem 5%;
+		text-align: center;
+		color: #ffffff;
+	}
+	.blog-hero-inner {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+	.blog-hero h1 {
+		font-size: 2.5rem;
+		font-weight: 800;
+		margin: 0 0 0.75rem;
+		letter-spacing: -0.02em;
+	}
+	.blog-hero p {
+		font-size: 1.05rem;
+		color: rgba(255,255,255,0.75);
+		margin: 0;
+		line-height: 1.6;
+	}
+	.blog-body {
+		padding: 3.5rem 5%;
+		background-color: #f8fafc;
+	}
+	.blog-layout {
+		display: grid;
+		grid-template-columns: 1fr 320px;
+		gap: 2.5rem;
+		max-width: 1500px;
+		margin: 0 auto;
+		align-items: start;
+	}
+	.blog-main {
+		min-width: 0;
+	}
+	.post-featured {
+		margin-bottom: 2.5rem;
+	}
+	.post-featured-link {
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		text-decoration: none;
+		background: #ffffff;
+		border: 1px solid #f1f5f9;
+		overflow: hidden;
+		transition: box-shadow 0.3s ease, transform 0.3s ease;
+	}
+	.post-featured-link:hover {
+		box-shadow: 0 12px 40px rgba(10, 36, 99, 0.08);
+		transform: translateY(-2px);
+	}
+	.post-featured-image {
+		overflow: hidden;
+		min-height: 320px;
+	}
+	.post-featured-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.post-featured-body {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.post-featured-body h2 {
+		font-size: 1.55rem;
+		font-weight: 700;
+		color: #0a2463;
+		margin: 0 0 0.75rem;
+		line-height: 1.35;
+		transition: color 0.2s ease;
+	}
+	.post-featured-body h2:hover {
+		color: #e63946;
+	}
+	.post-featured-body p {
+		font-size: 0.9rem;
+		color: #64748b;
+		margin: 0 0 1.25rem;
+		line-height: 1.65;
+	}
+	.btn-read {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.8rem;
+		font-weight: 700;
+		color: #e63946;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		transition: color 0.2s ease, gap 0.2s ease;
+	}
+	.btn-read:hover {
+		gap: 0.75rem;
+		color: #c53030;
+	}
+	.post-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5rem;
+	}
+	.post-card {
+		background: #ffffff;
+		border: 1px solid #f1f5f9;
+		overflow: hidden;
+		transition: box-shadow 0.3s ease, transform 0.3s ease;
+	}
+	.post-card:hover {
+		box-shadow: 0 8px 30px rgba(10, 36, 99, 0.06);
+		transform: translateY(-2px);
+	}
+	.post-card-link {
+		text-decoration: none;
+		display: block;
+	}
+	.post-card-image {
+		overflow: hidden;
+		height: 200px;
+	}
+	.post-card-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.5s ease;
+	}
+	.post-card:hover .post-card-image img {
+		transform: scale(1.05);
+	}
+	.post-card-body {
+		padding: 1.25rem;
+	}
+	.post-card-body h3 {
+		font-size: 1rem;
+		font-weight: 700;
+		color: #0a2463;
+		margin: 0 0 0.5rem;
+		line-height: 1.45;
+		transition: color 0.2s ease;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	.post-card:hover .post-card-body h3 {
+		color: #e63946;
+	}
+	.post-card-body p {
+		font-size: 0.8rem;
+		color: #64748b;
+		margin: 0;
+		line-height: 1.6;
+	}
+	.post-meta {
+		font-size: 0.72rem;
+		color: #94a3b8;
+		margin-bottom: 0.5rem;
+	}
+	.post-image-placeholder {
+		width: 100%;
+		height: 100%;
+		background: #f1f5f9;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 200px;
+	}
+	.blog-sidebar {
+		position: sticky;
+		top: 5rem;
+	}
+	.sidebar-widget {
+		background: #ffffff;
+		border: 1px solid #f1f5f9;
+		padding: 1.5rem;
+	}
+	.sidebar-widget h4 {
+		font-size: 0.8rem;
+		font-weight: 700;
+		color: #0a2463;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		margin: 0 0 1.25rem;
+	}
+	.category-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+	.category-list a {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.65rem 0.75rem;
+		text-decoration: none;
+		font-size: 0.85rem;
+		color: #334155;
+		border-radius: 6px;
+		transition: all 0.2s ease;
+	}
+	.category-list a:hover {
+		background: rgba(10, 36, 99, 0.04);
+		color: #0a2463;
+	}
+	.cat-count {
+		font-size: 0.72rem;
+		color: #94a3b8;
+		background: #f1f5f9;
+		padding: 0.15rem 0.55rem;
+		border-radius: 10px;
+	}
+	.sidebar-empty {
+		font-size: 0.85rem;
+		color: #94a3b8;
+		margin: 0;
+	}
+	@media (max-width: 1024px) {
+		.blog-layout {
+			grid-template-columns: 1fr;
+		}
+		.blog-sidebar {
+			position: static;
+		}
+		.post-featured-link {
+			grid-template-columns: 1fr;
+		}
+		.post-featured-image {
+			min-height: 240px;
+		}
+	}
+	@media (max-width: 768px) {
+		.blog-hero {
+			padding: 3rem 5%;
+		}
+		.blog-hero h1 {
+			font-size: 1.8rem;
+		}
+		.blog-body {
+			padding: 2rem 5%;
+		}
+		.post-grid {
+			grid-template-columns: 1fr;
+		}
+		.post-featured-body {
+			padding: 1.25rem;
+		}
+		.post-featured-body h2 {
+			font-size: 1.2rem;
+		}
+	}
+</style>
