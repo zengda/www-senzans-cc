@@ -1,5 +1,5 @@
 ---
-import { getPosts, getPageBySlug } from '../lib/graphql';
+import { getPosts } from '../lib/graphql';
 import FormattedDate from './FormattedDate.astro';
 
 const postsData = await getPosts(4);
@@ -65,7 +65,7 @@ const latestPosts = posts.slice(1, 4);
 				<div class="blog-list">
 					{latestPosts.map((post, index) => (
 						<>
-							<a href={`/blog/${post.slug}`} class="blog-item" key={post.id}>
+							<a href={`/blog/${post.slug}`} class="blog-item">
 								<div class="blog-item-image">
 									<img 
 										src={post.featuredImage?.node?.sourceUrl || `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(post.title + ' product thumbnail')}&image_size=square`} 

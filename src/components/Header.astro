@@ -65,7 +65,7 @@
 		});
 
 		document.addEventListener('click', (e) => {
-			if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+			if (!hamburger.contains(e.target as Node) && !mobileMenu.contains(e.target as Node)) {
 				hamburger.setAttribute('aria-expanded', 'false');
 				hamburger.classList.remove('is-active');
 				mobileMenu.classList.remove('is-open');

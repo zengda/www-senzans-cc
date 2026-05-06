@@ -4,7 +4,6 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
 const postsData = await getPosts(20);
 const posts = postsData.posts.nodes;
@@ -50,7 +49,7 @@ const pageDescription = 'Explore the latest insights on digital stands, ergonomi
 										</div>
 										<h2>{featuredPost.title}</h2>
 										<p>{featuredPost.excerpt?.replace(/<[^>]+>/g, '') || 'Read this article'}</p>
-										<span class="btn-read" href={`/blog/${featuredPost.slug}`}>
+										<span class="btn-read">
 											Read Article
 											<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 												<polyline points="9 18 15 12 9 6"/>
