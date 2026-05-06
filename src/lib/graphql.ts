@@ -18,10 +18,14 @@ export async function fetchGraphQL<T>(query: string, variables?: Record<string, 
 		throw new Error(`GraphQL request failed: ${response.status} - ${errorText}`);
 	}
 
-	const result = await response.json();
+	const result: { data?: T; errors?: Array<{ message: string }> } = await response.json();
 
-	if (result.errors) {
+	if (result.errors && result.errors.length > 0) {
 		throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
+	}
+
+	if (!result.data) {
+		throw new Error('No data returned from GraphQL');
 	}
 
 	return result.data;
