@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background -->
+  <rect x="0" y="0" width="200" height="200" fill="none"/>
+  
+  <!-- Logo Graphic -->
+  <!-- Red square -->
+  <rect x="55" y="45" width="35" height="35" fill="#e63946"/>
+  
+  <!-- Large dark blue square -->
+  <rect x="95" y="45" width="80" height="100" fill="#ffffff"/>
+  
+  <!-- Left dark blue rectangle -->
+  <rect x="55" y="85" width="35" height="95" fill="#ffffff"/>
+  
+  <!-- Bottom dark blue rectangle -->
+  <rect x="95" y="145" width="50" height="35" fill="#ffffff"/>
+  
+  <!-- Small dark blue square -->
+  <rect x="150" y="145" width="25" height="35" fill="#ffffff"/>
+  
+  <!-- SENZANS Text -->
+  <text x="100" y="185" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">SENZANS</text>
+</svg>
