@@ -25,6 +25,16 @@
 				<li><a href="/services/support">Global Support</a></li>
 			</ul>
 		</div>
+		<div class="footer-contact">
+			<h4>Contact Us</h4>
+			<ul class="contact-info">
+				<li><span class="contact-label">Tel:</span> +86-0769-8188-6860</li>
+				<li><span class="contact-label">Fax:</span> +86 0755-3386 3827</li>
+				<li><span class="contact-label">Email:</span> <a href="mailto:saize@senzans.com">saize@senzans.com</a></li>
+				<li><span class="contact-label">Website:</span> <a href="https://www.senzans.cn" target="_blank" rel="noopener noreferrer">www.senzans.cn</a></li>
+				<li><span class="contact-label">Address:</span> No.107, Meihualin Road, Dalingshan Town, Guangdong Province</li>
+			</ul>
+		</div>
 		<div class="footer-right">
 			<p class="footer-right-label">Follow Us</p>
 			<div class="social-links">
@@ -52,7 +62,7 @@
 		</div>
 	</div>
 	<div class="footer-bottom">
-		<p>&copy; {new Date().getFullYear()} SENZANS INDUSTRIAL. All rights reserved.</p>
+		<p>Copyright © 2007 - {new Date().getFullYear()} SHENZHEN SENZANS INDUSTRIAL CO,LTD. All rights reserved.</p>
 	</div>
 </footer>
 <style>
@@ -104,7 +114,7 @@
 		color: rgba(255, 255, 255, 0.45);
 		margin: 0;
 	}
-	.footer-center h4, .footer-right-label {
+	.footer-center h4, .footer-contact h4, .footer-right-label {
 		color: #ffffff;
 		font-size: 0.8rem;
 		font-weight: 700;
@@ -127,6 +137,34 @@
 		transition: color 0.25s ease;
 	}
 	.footer-links li a:hover {
+		color: #ffffff;
+	}
+	.footer-contact {
+		max-width: 280px;
+	}
+	.contact-info {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
+	}
+	.contact-info li {
+		color: rgba(255, 255, 255, 0.55);
+		font-size: 0.825rem;
+		line-height: 1.5;
+	}
+	.contact-label {
+		color: rgba(255, 255, 255, 0.35);
+		margin-right: 0.3rem;
+	}
+	.contact-info a {
+		color: rgba(255, 255, 255, 0.55);
+		text-decoration: none;
+		transition: color 0.25s ease;
+	}
+	.contact-info a:hover {
 		color: #ffffff;
 	}
 	.footer-right {
